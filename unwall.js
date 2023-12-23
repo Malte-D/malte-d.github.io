@@ -48,6 +48,10 @@ function renderItems(items, container, afterNode, defaultNodeType = "p") {
         if (e.type == "rawHtml"){
             txt = e.html;
         }
+        if (e.type == "listItem"){
+            node.style = "margin-left: 16px"
+            txt = "- " + txt
+        }
         container.appendChild(node);
         if (!skipInnerHtml){
             node.innerHTML = txt || ("TODO: implement type " + e.type);
@@ -59,7 +63,7 @@ function renderItems(items, container, afterNode, defaultNodeType = "p") {
             afterNode.after(node);
         }
         if (e.type == "list"){
-            var listItems = e.list.items.map(i => ({...i, type: "text"}))
+            var listItems = e.list.items.map(i => ({...i, type: "list-item"}))
             renderItems(listItems, node, null, "li");
         }
         afterNode = node;
