@@ -10,7 +10,11 @@ function renderItems(items, container, afterNode, defaultNodeType = "p") {
         var skipInnerHtml = false;
         var nodeType = defaultNodeType;
         if (e.type == "list"){
-            nodeType = "ul" ; 
+            if (e.list.isOrdered){
+                nodeType = "ul" ; 
+            }else{
+                nodeType = "ol" ; 
+            }
             skipInnerHtml = true;
         }
         const node = document.createElement(nodeType);
@@ -18,7 +22,11 @@ function renderItems(items, container, afterNode, defaultNodeType = "p") {
             node.className = afterNode.className;
         }
         if (e.type == "list"){
-            node.style = "list-style-type: circle;"
+            if (e.list.isOrdered){
+                node.style = "list-style-type: upper-roman;"
+            }else{
+                node.style = "list-style-type: circle;"
+            }
         }
         if (e.type == "header"){
             node.style = "font-size: x-large;";
@@ -52,11 +60,7 @@ function renderItems(items, container, afterNode, defaultNodeType = "p") {
         }
         if (e.type == "list"){
             var listItems = e.list.items.map(i => ({...i, type: "text"}))
-            if (e.list.isOrdered){
-                renderItems(listItems, node, null, "li");
-            }else{
-                renderItems(listItems, node, null, "ol");
-            }
+            renderItems(listItems, node, null, "li");
         }
         afterNode = node;
     });
