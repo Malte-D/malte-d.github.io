@@ -63,7 +63,7 @@ function renderItems(items, container, afterNode, defaultNodeType = "p") {
             afterNode.after(node);
         }
         if (e.type == "list"){
-            var listItems = e.list.items.map(i => ({...i, type: "list-item"}))
+            var listItems = e.list.items.map(i => ({...i, type: "listItem"}))
             renderItems(listItems, node, null, "li");
         }
         afterNode = node;
