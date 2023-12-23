@@ -24,6 +24,9 @@ Fusion.globalContent.elements.forEach(e => {
         container.appendChild(iframe);
         txt = "s. unten oder <a href='" + e.embed.url + "'>hier</a>";
     }
+    if (e.type == "rawHtml"){
+        txt = e.html;
+    }
     container.appendChild(node);
     node.innerHTML = txt || ("TODO: implement type " + e.type);
     if (img){
