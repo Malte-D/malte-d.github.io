@@ -1,13 +1,17 @@
-const container = document.querySelector("[class*=paywalledContent]");
+const mainContainer = document.querySelector("[class*=paywalledContent]");
 var p = document.querySelector("[class*=paywalledContent] > p");
 
-function renderItems(items) {
+function renderItems(items, container, nodeType = "p") {
+    console.log("renderItems", items, container, nodeType);
     items.forEach(e => {
         if (e.type == "ad" || e.type == "piano" || e.type == "newsletterAd"){
             return;
         }
         var txt = e.text;
-        const node = document.createElement("p");
+        if (e.type == "list"){
+            nodeType = "ul" ;  
+        }
+        const node = document.createElement(nodeType);
         node.className = p.className;
         if (e.type == "header"){
             node.style = "font-size: x-large;";
@@ -35,11 +39,15 @@ function renderItems(items) {
             node.appendChild(img);
         }
         p.after(node);
+        if (e.type == "list"){
+            var listItems = e.list.items.map(i => ({...i, type: "text"}))
+            renderItems(listItems, node, "li");
+        }
         p = node;
     });
 }
 
-renderItems(Fusion.globalContent.elements);
+renderItems(Fusion.globalContent.elements, mainContainer);
 document.querySelector("[class*=paywalledContent]").style = "height:fit-content!important";
 document.querySelector("#piano-lightbox-article-kn").remove();
 document.querySelector("[class*=RecommendationContainer]").remove();
