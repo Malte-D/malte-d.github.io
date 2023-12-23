@@ -1,13 +1,14 @@
 const mainContainer = document.querySelector("[class*=paywalledContent]");
 
-function renderItems(items, container, afterNode, nodeType = "p") {
-    console.log("renderItems", items, container, nodeType);
+function renderItems(items, container, afterNode, defaultNodeType = "p") {
+    console.log("renderItems", items, container, defaultNodeType);
     items.forEach(e => {
         if (e.type == "ad" || e.type == "piano" || e.type == "newsletterAd"){
             return;
         }
         var txt = e.text;
         var skipInnerHtml = false;
+        var nodeType = defaultNodeType;
         if (e.type == "list"){
             nodeType = "ul" ; 
             skipInnerHtml = true;
