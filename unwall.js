@@ -49,8 +49,7 @@ function renderItems(items, container, afterNode, defaultNodeType = "p") {
             txt = e.html;
         }
         if (e.type == "listItem"){
-            node.style = "margin-left: 16px"
-            txt = "- " + txt
+            node.style = "margin-left: 3rem"
         }
         container.appendChild(node);
         if (!skipInnerHtml){
