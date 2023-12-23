@@ -14,8 +14,11 @@ function renderItems(items, container, afterNode, defaultNodeType = "p") {
             skipInnerHtml = true;
         }
         const node = document.createElement(nodeType);
-        if (afterNode){
+        if (afterNode?.className){
             node.className = afterNode.className;
+        }
+        if (e.type == "list"){
+            node.style = "list-style-type: circle;"
         }
         if (e.type == "header"){
             node.style = "font-size: x-large;";
@@ -49,7 +52,11 @@ function renderItems(items, container, afterNode, defaultNodeType = "p") {
         }
         if (e.type == "list"){
             var listItems = e.list.items.map(i => ({...i, type: "text"}))
-            renderItems(listItems, node, null, "li");
+            if (e.list.isOrdered){
+                renderItems(listItems, node, null, "li");
+            }else{
+                renderItems(listItems, node, null, "ol");
+            }
         }
         afterNode = node;
     });
