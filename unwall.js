@@ -13,7 +13,9 @@ function renderItems(items, container, afterNode, nodeType = "p") {
             skipInnerHtml = true;
         }
         const node = document.createElement(nodeType);
-        node.className = p.className;
+        if (p){
+            node.className = p.className;
+        }
         if (e.type == "header"){
             node.style = "font-size: x-large;";
         }
