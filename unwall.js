@@ -11,9 +11,9 @@ function renderItems(items, container, afterNode, defaultNodeType = "p") {
         var nodeType = defaultNodeType;
         if (e.type == "list"){
             if (e.list.isOrdered){
-                nodeType = "ul" ; 
+                nodeType = "ul" ;
             }else{
-                nodeType = "ol" ; 
+                nodeType = "ol" ;
             }
             skipInnerHtml = true;
         }
@@ -41,7 +41,7 @@ function renderItems(items, container, afterNode, defaultNodeType = "p") {
         if (e.type == "customEmbed"){
             var iframe = document.createElement("iframe");
             iframe.src = e.embed.url;
-            iframe.style = "width: 100%; height: 500px; background: #97acbf";	
+            iframe.style = "width: 100%; height: 500px; background: #97acbf";
             container.appendChild(iframe);
             txt = "s. unten oder <a href='" + e.embed.url + "'>hier</a>";
         }
@@ -73,3 +73,12 @@ renderItems(Fusion.globalContent.elements, mainContainer, document.querySelector
 document.querySelector("[class*=paywalledContent]").style = "height:fit-content!important";
 document.querySelector("#piano-lightbox-article-kn").remove();
 document.querySelector("[class*=RecommendationContainer]").remove();
+
+
+const children = document.querySelector("[class*=paywalledContent]").children;
+
+for (let i = 0; i < children.length; i++) {
+    const element = children[i];
+
+    element.style = "height:unset!important;overflow:unset!important";
+}
