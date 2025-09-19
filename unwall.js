@@ -71,8 +71,8 @@ function renderItems(items, container, afterNode, defaultNodeType = "p") {
 
 renderItems(Fusion.globalContent.elements, mainContainer, document.querySelector("[class*=paywalledContent] > p"));
 document.querySelector("[class*=paywalledContent]").style = "height:fit-content!important";
-document.querySelector("#piano-lightbox-article-kn").remove();
-document.querySelector("[class*=RecommendationContainer]").remove();
+document.querySelector("#piano-lightbox-article-kn")?.remove();
+document.querySelector("[class*=RecommendationContainer]")?.remove();
 
 
 const children = document.querySelector("[class*=paywalledContent]").children;
